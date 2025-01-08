@@ -22,19 +22,62 @@ private var cards: [IndexCard] = [
     IndexCard(title: "Card 5", img: UIImage(systemName: "tray.circle")!),
     IndexCard(title: "Card 6", img: UIImage(systemName: "document.fill")!),
     IndexCard(title: "Card 7", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
-    ]
+]
 
 class ReorderItemsInteractivelyExampleController: UICollectionViewController {
+    
+    var bottomNavBar: UINavigationBar!
+    
+    private var selectedIndices: Set<IndexPath> = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.collectionViewLayout = createLayout()
-    
+        
         self.installsStandardGestureForInteractiveMovement = false
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
         view.addGestureRecognizer(longPressGestureRecognizer)
         
+        navigationItem.leftBarButtonItem = editButtonItem
+        
+        bottomNavBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        let navigationItem = UINavigationItem(title: "My Title")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
+        bottomNavBar.items = [navigationItem]
+        view.addSubview(bottomNavBar)
+        
+        bottomNavBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomNavBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomNavBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomNavBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        bottomNavBar.isHidden = true
+    }
+    
+    
+    
+    @objc func remove() {
+        selectedIndices.forEach{
+            cards.remove(at: $0.row)
+        }
+        collectionView.deleteItems(at: Array(selectedIndices))
+        selectedIndices.removeAll()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        collectionView.visibleCells.forEach {
+            let cell = $0 as! MyCollectionViewCell
+            cell.selectable = editing
+            let tempSelectedIndices = Array(selectedIndices)
+            selectedIndices.removeAll()
+            collectionView.reloadItems(at: tempSelectedIndices)
+        }
+        if (!editing) { bottomNavBar.isHidden = true }
         
     }
     
@@ -55,21 +98,21 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return true
+        return isEditing
     }
     
     override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
+        
         collectionView.performBatchUpdates {
             // Удаляем элемент из старой позиции
             let item = cards.remove(at: sourceIndexPath.item)
-
+            
             // Вставляем элемент на новое место
             cards.insert(item, at: destinationIndexPath.item)
             //collectionView.moveItem(at: sourceIndexPath, to: destinationIndexPath)
         }
     }
-
+    
     func createLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalWidth(0.3))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -84,26 +127,39 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         
     }
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return cards.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
-            
+        
         cell.title.text = cards[indexPath.item].title
         cell.img.image = cards[indexPath.item].img
-    
+        cell.selectable = isEditing
+        cell.cellSelected = selectedIndices.contains(indexPath)
         return cell
     }
-
-
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard isEditing else { return }
+        if selectedIndices.contains(indexPath) {
+            selectedIndices.remove(indexPath)
+        } else {
+            selectedIndices.insert(indexPath)
+        }
+        
+        collectionView.reloadItems(at: [indexPath])
+        
+        bottomNavBar.isHidden =  selectedIndices.count == 0
+    }
+    
 }

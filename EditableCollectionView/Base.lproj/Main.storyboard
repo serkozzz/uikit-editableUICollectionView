@@ -93,6 +93,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="152" height="150"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xsc-up-VsY" userLabel="Selection">
+                                            <rect key="frame" x="112" y="110" width="40" height="40"/>
+                                            <subviews>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-tx-Nrv" userLabel="Selected">
+                                                    <rect key="frame" x="0.0" y="0.66666666666666785" width="40" height="38.666666666666657"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8cz-ti-E9N" userLabel="Unselected">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="38.666666666666629"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="Cms-tx-Nrv" firstAttribute="top" secondItem="Xsc-up-VsY" secondAttribute="top" id="C7B-xL-acu"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cms-tx-Nrv" secondAttribute="trailing" id="DBw-Bp-Yds"/>
+                                                <constraint firstAttribute="height" constant="40" id="K3m-Su-9wH"/>
+                                                <constraint firstAttribute="bottom" secondItem="Cms-tx-Nrv" secondAttribute="bottom" id="NnX-tZ-l6B"/>
+                                                <constraint firstItem="Cms-tx-Nrv" firstAttribute="leading" secondItem="Xsc-up-VsY" secondAttribute="leading" id="VNv-S2-d5r"/>
+                                                <constraint firstAttribute="width" constant="40" id="ucD-N3-buG"/>
+                                            </constraints>
+                                        </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="8p0-3m-fDI">
                                             <rect key="frame" x="0.0" y="0.0" width="152" height="150"/>
                                             <subviews>
@@ -109,8 +130,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Xsc-up-VsY" secondAttribute="bottom" id="EpX-jF-pZB"/>
                                         <constraint firstAttribute="trailing" secondItem="8p0-3m-fDI" secondAttribute="trailing" id="JK0-xd-N5a"/>
                                         <constraint firstItem="8p0-3m-fDI" firstAttribute="leading" secondItem="v71-4o-65u" secondAttribute="leading" id="hVi-RJ-OUi"/>
+                                        <constraint firstAttribute="trailing" secondItem="Xsc-up-VsY" secondAttribute="trailing" id="mFJ-hx-THw"/>
                                         <constraint firstAttribute="bottom" secondItem="8p0-3m-fDI" secondAttribute="bottom" id="uiW-Gh-Lj8"/>
                                         <constraint firstItem="8p0-3m-fDI" firstAttribute="top" secondItem="v71-4o-65u" secondAttribute="top" id="zAp-vA-nFa"/>
                                     </constraints>
@@ -118,7 +141,10 @@
                                 <size key="customSize" width="152" height="150"/>
                                 <connections>
                                     <outlet property="img" destination="nRo-Sl-sGn" id="JRn-cp-nak"/>
+                                    <outlet property="selectedSign" destination="Cms-tx-Nrv" id="VO8-rp-TKR"/>
+                                    <outlet property="selectionSignContrainer" destination="Xsc-up-VsY" id="Wmv-Jf-Ru9"/>
                                     <outlet property="title" destination="JFT-SL-tW4" id="ZRU-fC-Mmo"/>
+                                    <outlet property="unselectedSign" destination="8cz-ti-E9N" id="p4k-jW-4mE"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -132,6 +158,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yvj-Ai-x51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1492" y="723"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BsF-WJ-eCD">
+            <objects>
+                <viewController id="aZe-zq-ML1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yZh-YK-gUA">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDg-Yb-aKf">
+                                <rect key="frame" x="0.0" y="808" width="393" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="RuU-uo-6HW">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="cgu-qo-50q"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="h4h-aK-Ebf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QDg-Yb-aKf" firstAttribute="trailing" secondItem="h4h-aK-Ebf" secondAttribute="trailing" id="1a4-IY-DmB"/>
+                            <constraint firstItem="QDg-Yb-aKf" firstAttribute="leading" secondItem="h4h-aK-Ebf" secondAttribute="leading" id="bHg-pJ-bub"/>
+                            <constraint firstAttribute="bottom" secondItem="QDg-Yb-aKf" secondAttribute="bottom" id="mW4-rT-OT1"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6eF-I6-ze2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2305" y="706"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="U7u-pQ-Vm8">
@@ -196,6 +252,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="circle" catalog="system" width="128" height="123"/>
         <image name="exclamationmark.triangle.text.page.rtl" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
