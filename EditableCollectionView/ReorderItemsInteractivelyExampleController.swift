@@ -102,15 +102,10 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        collectionView.performBatchUpdates {
-            // Удаляем элемент из старой позиции
-            let item = cards.remove(at: sourceIndexPath.item)
-            
-            // Вставляем элемент на новое место
-            cards.insert(item, at: destinationIndexPath.item)
-            //collectionView.moveItem(at: sourceIndexPath, to: destinationIndexPath)
-        }
+
+        let item = cards.remove(at: sourceIndexPath.item)
+        // Вставляем элемент на новое место
+        cards.insert(item, at: destinationIndexPath.item)
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
