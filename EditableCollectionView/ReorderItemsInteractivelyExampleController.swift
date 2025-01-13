@@ -42,6 +42,7 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         
+        
         bottomNavBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         let navigationItem = UINavigationItem(title: "My Title")
         
@@ -53,7 +54,7 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         NSLayoutConstraint.activate([
             bottomNavBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomNavBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomNavBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomNavBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         bottomNavBar.isHidden = true
     }
@@ -77,7 +78,7 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
             selectedIndices.removeAll()
             collectionView.reloadItems(at: tempSelectedIndices)
         }
-        if (!editing) { bottomNavBar.isHidden = true }
+        bottomNavBar.isHidden = !editing
         
     }
     

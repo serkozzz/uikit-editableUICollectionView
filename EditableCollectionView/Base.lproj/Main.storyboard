@@ -168,7 +168,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDg-Yb-aKf">
-                                <rect key="frame" x="0.0" y="808" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="774" width="393" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="RuU-uo-6HW">
                                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="cgu-qo-50q"/>
@@ -181,7 +181,7 @@
                         <constraints>
                             <constraint firstItem="QDg-Yb-aKf" firstAttribute="trailing" secondItem="h4h-aK-Ebf" secondAttribute="trailing" id="1a4-IY-DmB"/>
                             <constraint firstItem="QDg-Yb-aKf" firstAttribute="leading" secondItem="h4h-aK-Ebf" secondAttribute="leading" id="bHg-pJ-bub"/>
-                            <constraint firstAttribute="bottom" secondItem="QDg-Yb-aKf" secondAttribute="bottom" id="mW4-rT-OT1"/>
+                            <constraint firstItem="h4h-aK-Ebf" firstAttribute="bottom" secondItem="QDg-Yb-aKf" secondAttribute="bottom" id="mW4-rT-OT1"/>
                         </constraints>
                     </view>
                 </viewController>
