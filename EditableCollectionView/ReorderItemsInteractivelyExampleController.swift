@@ -22,6 +22,16 @@ private var cards: [IndexCard] = [
     IndexCard(title: "Card 5", img: UIImage(systemName: "tray.circle")!),
     IndexCard(title: "Card 6", img: UIImage(systemName: "document.fill")!),
     IndexCard(title: "Card 7", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
+    IndexCard(title: "Card 8", img: UIImage(systemName: "folder")!),
+    IndexCard(title: "Card 9", img: UIImage(systemName: "tray.2")!),
+    IndexCard(title: "Card 10", img: UIImage(systemName: "tray.circle")!),
+    IndexCard(title: "Card 11", img: UIImage(systemName: "document.fill")!),
+    IndexCard(title: "Card 12", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
+    IndexCard(title: "Card 13", img: UIImage(systemName: "folder")!),
+    IndexCard(title: "Card 14", img: UIImage(systemName: "tray.2")!),
+    IndexCard(title: "Card 15", img: UIImage(systemName: "tray.circle")!),
+    IndexCard(title: "Card 16", img: UIImage(systemName: "document.fill")!),
+    IndexCard(title: "Card 17", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
 ]
 
 class ReorderItemsInteractivelyExampleController: UICollectionViewController {
@@ -41,24 +51,25 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         view.addGestureRecognizer(longPressGestureRecognizer)
         
         navigationItem.leftBarButtonItem = editButtonItem
+
+
         
+        let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
         
-        bottomNavBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
-        let navigationItem = UINavigationItem(title: "My Title")
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
-        bottomNavBar.items = [navigationItem]
-        view.addSubview(bottomNavBar)
-        
-        bottomNavBar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            bottomNavBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomNavBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomNavBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-        bottomNavBar.isHidden = true
+
+   
+        let titleLabel = UILabel()
+        titleLabel.text = "Центральный текст"
+        titleLabel.textColor = .black
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        titleLabel.textAlignment = .center
+        titleLabel.sizeToFit() // Устанавливаем нужный размер
+
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        self.toolbarItems = [.flexibleSpace(), titleItem, .flexibleSpace(), removeButton]
+
+        self.navigationController?.isToolbarHidden = true
     }
-    
     
     
     @objc func remove() {
@@ -78,8 +89,8 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
             selectedIndices.removeAll()
             collectionView.reloadItems(at: tempSelectedIndices)
         }
-        bottomNavBar.isHidden = !editing
         
+        if (!editing) { self.navigationController?.isToolbarHidden = true }
     }
     
     @objc func longPressGesture(_ recognizer: UILongPressGestureRecognizer) {
@@ -155,7 +166,7 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         
         collectionView.reloadItems(at: [indexPath])
         
-        bottomNavBar.isHidden =  selectedIndices.count == 0
+        navigationController?.isToolbarHidden =  selectedIndices.count == 0
     }
     
 }
