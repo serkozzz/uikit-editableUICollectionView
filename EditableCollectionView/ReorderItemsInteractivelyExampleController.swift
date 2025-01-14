@@ -36,10 +36,8 @@ private var cards: [IndexCard] = [
 
 class ReorderItemsInteractivelyExampleController: UICollectionViewController {
     
-    var bottomNavBar: UINavigationBar!
-    
     private var selectedIndices: Set<IndexPath> = []
-    
+    let toolbarTitlelLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +55,13 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
         
 
-   
-        let titleLabel = UILabel()
-        titleLabel.text = "Центральный текст"
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        titleLabel.textAlignment = .center
-        titleLabel.sizeToFit() // Устанавливаем нужный размер
+        toolbarTitlelLabel.text = "фываф"
+        toolbarTitlelLabel.textColor = .black
+        toolbarTitlelLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        toolbarTitlelLabel.textAlignment = .center
+        toolbarTitlelLabel.sizeToFit() // Устанавливаем нужный размер
 
-        let titleItem = UIBarButtonItem(customView: titleLabel)
+        let titleItem = UIBarButtonItem(customView: toolbarTitlelLabel)
         self.toolbarItems = [.flexibleSpace(), titleItem, .flexibleSpace(), removeButton]
 
         self.navigationController?.isToolbarHidden = true
@@ -167,6 +163,9 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         collectionView.reloadItems(at: [indexPath])
         
         navigationController?.isToolbarHidden =  selectedIndices.count == 0
+        toolbarTitlelLabel.text = "\(selectedIndices.count) cards selected"
+        toolbarTitlelLabel.sizeToFit()
+
     }
     
 }
