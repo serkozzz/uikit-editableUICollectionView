@@ -9,9 +9,19 @@ import UIKit
 
 private let reuseIdentifier = "mycell"
 
-private struct IndexCard {
+private struct IndexCard : Hashable {
     var title: String
     var img: UIImage
+    
+    var id = UUID()
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: IndexCard, rhs: IndexCard) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 private var cards: [IndexCard] = [
@@ -36,8 +46,9 @@ private var cards: [IndexCard] = [
 
 class ReorderItemsInteractivelyExampleController: UICollectionViewController {
     
-    private var selectedIndices: Set<IndexPath> = []
+    private var selectedItems: Set<IndexCard> = []
     let toolbarTitlelLabel = UILabel()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, IndexCard>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,15 +76,34 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         self.toolbarItems = [.flexibleSpace(), titleItem, .flexibleSpace(), removeButton]
 
         self.navigationController?.isToolbarHidden = true
+        
+        dataSource = UICollectionViewDiffableDataSource<Int, IndexCard>(collectionView: collectionView) { [weak self] collectionView, indexPath, card in
+            
+            guard let self else { return nil }
+            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+            
+            cell.title.text = card.title
+            cell.img.image = card.img
+            cell.selectable = isEditing
+            cell.cellSelected = selectedItems.contains(card)
+            return cell
+        }
+        applySnapshot()
+    }
+    
+    func applySnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, IndexCard>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(cards)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     
     @objc func remove() {
-        selectedIndices.forEach{
-            cards.remove(at: $0.row)
-        }
-        collectionView.deleteItems(at: Array(selectedIndices))
-        selectedIndices.removeAll()
+
+        cards.removeAll { selectedItems.contains($0) }
+        applySnapshot()
+        selectedItems.removeAll()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -81,9 +111,12 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         collectionView.visibleCells.forEach {
             let cell = $0 as! MyCollectionViewCell
             cell.selectable = editing
-            let tempSelectedIndices = Array(selectedIndices)
-            selectedIndices.removeAll()
-            collectionView.reloadItems(at: tempSelectedIndices)
+            let tempSelectedItems = Array(selectedItems)
+            selectedItems.removeAll()
+            
+            var snapshot = dataSource.snapshot()
+            snapshot.reloadItems(tempSelectedItems)
+            dataSource.apply(snapshot, animatingDifferences: false)
         }
         
         if (!editing) { self.navigationController?.isToolbarHidden = true }
@@ -92,19 +125,19 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
     @objc func longPressGesture(_ recognizer: UILongPressGestureRecognizer) {
         switch recognizer.state {
         case .began:
-            guard let selectedIndexPath = collectionView.indexPathForItem(at: recognizer.location(in: collectionView)) else {return }
+            guard let selectedIndexPath = collectionView.indexPathForItem(at: recognizer.location(in: collectionView)) else { return }
             collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(recognizer.location(in: collectionView))
         case .ended:
             collectionView.endInteractiveMovement()
+            
         default:
             collectionView.cancelInteractiveMovement()
-            break
         }
     }
     
-    
+
     override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return isEditing
     }
@@ -114,6 +147,8 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         let item = cards.remove(at: sourceIndexPath.item)
         // Вставляем элемент на новое место
         cards.insert(item, at: destinationIndexPath.item)
+        
+        applySnapshot()
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
@@ -129,41 +164,25 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         return layout
         
     }
-    // MARK: UICollectionViewDataSource
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return cards.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
-        
-        cell.title.text = cards[indexPath.item].title
-        cell.img.image = cards[indexPath.item].img
-        cell.selectable = isEditing
-        cell.cellSelected = selectedIndices.contains(indexPath)
-        return cell
-    }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard isEditing else { return }
-        if selectedIndices.contains(indexPath) {
-            selectedIndices.remove(indexPath)
+        let item = cards[indexPath.item]
+        
+        if selectedItems.contains(item) {
+            selectedItems.remove(item)
         } else {
-            selectedIndices.insert(indexPath)
+            selectedItems.insert(item)
         }
         
-        collectionView.reloadItems(at: [indexPath])
+        var snapshot = NSDiffableDataSourceSnapshot<Int, IndexCard>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(cards)
+        snapshot.reloadItems([item])
+        dataSource.apply(snapshot, animatingDifferences: true)
         
-        navigationController?.isToolbarHidden =  selectedIndices.count == 0
-        toolbarTitlelLabel.text = "\(selectedIndices.count) cards selected"
+        navigationController?.isToolbarHidden =  selectedItems.count == 0
+        toolbarTitlelLabel.text = "\(selectedItems.count) cards selected"
         toolbarTitlelLabel.sizeToFit()
 
     }
