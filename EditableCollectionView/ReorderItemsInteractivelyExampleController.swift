@@ -108,16 +108,13 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        collectionView.visibleCells.forEach {
-            let cell = $0 as! MyCollectionViewCell
-            cell.selectable = editing
-            let tempSelectedItems = Array(selectedItems)
-            selectedItems.removeAll()
-            
-            var snapshot = dataSource.snapshot()
-            snapshot.reloadItems(tempSelectedItems)
-            dataSource.apply(snapshot, animatingDifferences: false)
-        }
+    
+        selectedItems.removeAll()
+        
+        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
+        let visibleItems = visibleIndexPaths.compactMap { dataSource.itemIdentifier(for: $0) }
+    
+        reloadItems(visibleItems)
         
         if (!editing) { self.navigationController?.isToolbarHidden = true }
     }
@@ -165,6 +162,13 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         
     }
     
+    private func reloadItems(_ items: [IndexCard]) {
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems(items)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard isEditing else { return }
         let item = cards[indexPath.item]
@@ -175,11 +179,7 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
             selectedItems.insert(item)
         }
         
-        var snapshot = NSDiffableDataSourceSnapshot<Int, IndexCard>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(cards)
-        snapshot.reloadItems([item])
-        dataSource.apply(snapshot, animatingDifferences: true)
+        reloadItems([item])
         
         navigationController?.isToolbarHidden =  selectedItems.count == 0
         toolbarTitlelLabel.text = "\(selectedItems.count) cards selected"
