@@ -24,38 +24,9 @@ private var cards: [IndexCard] = [
     IndexCard(title: "Card 7", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
     ]
 
-class DragNDropExampleController: UICollectionViewController, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+class DragNDropExampleController: UICollectionViewController {
 
-    func collectionView(_ collectionView: UICollectionView,
-                        itemsForBeginning session: UIDragSession,
-                        at indexPath: IndexPath) -> [UIDragItem] {
-        let item = cards[indexPath.item].title as NSString
-        let itemProvider = NSItemProvider(object: item)
-        return [UIDragItem(itemProvider: itemProvider)]
-    }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        dropSessionDidUpdate session: UIDropSession,
-                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        performDropWith coordinator: UICollectionViewDropCoordinator) {
-        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
-
-        collectionView.performBatchUpdates {
-            // Удаляем элемент из старой позиции
-            let item = cards.remove(at: coordinator.items.first!.sourceIndexPath!.item)
-
-            // Вставляем элемент на новое место
-            cards.insert(item, at: destinationIndexPath.item)
-            collectionView.moveItem(at: coordinator.items.first!.sourceIndexPath!, to: destinationIndexPath)
-        }
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.collectionViewLayout = createLayout()
@@ -93,13 +64,48 @@ class DragNDropExampleController: UICollectionViewController, UICollectionViewDr
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
             
         cell.title.text = cards[indexPath.item].title
         cell.img.image = cards[indexPath.item].img
     
         return cell
     }
+}
 
 
+extension DragNDropExampleController :  UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        itemsForBeginning session: UIDragSession,
+                        at indexPath: IndexPath) -> [UIDragItem] {
+        let itemProvider = NSItemProvider(object: NSString())
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = cards[indexPath.item].title as NSString
+        return [dragItem]
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        dropSessionDidUpdate session: UIDropSession,
+                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath,
+              let dragItem = coordinator.items.first?.dragItem
+        else { return }
+
+        collectionView.performBatchUpdates {
+            // Удаляем элемент из старой позиции
+            let item = cards.remove(at: coordinator.items.first!.sourceIndexPath!.item)
+
+            // Вставляем элемент на новое место
+            cards.insert(item, at: destinationIndexPath.item)
+            collectionView.moveItem(at: coordinator.items.first!.sourceIndexPath!, to: destinationIndexPath)
+        }
+        
+        coordinator.drop(dragItem, toItemAt: destinationIndexPath)
+    }
 }
