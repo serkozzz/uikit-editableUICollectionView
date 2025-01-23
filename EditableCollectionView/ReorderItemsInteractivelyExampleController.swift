@@ -80,7 +80,7 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
         dataSource = UICollectionViewDiffableDataSource<Int, IndexCard>(collectionView: collectionView) { [weak self] collectionView, indexPath, card in
             
             guard let self else { return nil }
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
             
             cell.title.text = card.title
             cell.img.image = card.img

@@ -36,6 +36,8 @@ private var cards: [IndexCard] = [
 class DragNDropExampleController: UICollectionViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Int, IndexCard>!
+    private var isFirstDropUpdate = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +47,9 @@ class DragNDropExampleController: UICollectionViewController {
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
 
-        dataSource = UICollectionViewDiffableDataSource<Int, IndexCard>(collectionView: collectionView) { [weak self] collectionView, indexPath, card in
-            
-            guard let self else { return nil }
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+        dataSource = UICollectionViewDiffableDataSource<Int, IndexCard>(collectionView: collectionView) { collectionView, indexPath, card in
+        
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
                 
             cell.title.text = cards[indexPath.item].title
             cell.img.image = cards[indexPath.item].img
@@ -79,7 +80,6 @@ class DragNDropExampleController: UICollectionViewController {
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
-        
     }
 }
 
@@ -89,16 +89,49 @@ extension DragNDropExampleController: UICollectionViewDragDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         itemsForBeginning session: UIDragSession,
                         at indexPath: IndexPath) -> [UIDragItem] {
-        let item = cards[indexPath.item].title as NSString
-        let itemProvider = NSItemProvider(object: item)
-        return [UIDragItem(itemProvider: itemProvider)]
+        let itemProvider = NSItemProvider(object: NSString())
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = cards[indexPath.item]
+        return [dragItem]
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        dropSessionDidUpdate session: UIDropSession,
-                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    func collectionView(_ collectionView: UICollectionView, dragSessionWillBegin session: any UIDragSession) {
+        isFirstDropUpdate = true
     }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        dropSessionDidUpdate session: any UIDropSession,
+        withDestinationIndexPath destinationIndexPath: IndexPath?
+    ) -> UICollectionViewDropProposal {
+        
+        // Skipping the first update.
+        // Otherwise UICollectionView will set dragged state for the wring cell.
+        if isFirstDropUpdate {
+            isFirstDropUpdate = false
+            return UICollectionViewDropProposal(operation: .move)
+        }
+        
+        if let dstIdxPath = destinationIndexPath {
+        
+            let srcItemID = session.localDragSession!.items.first!.localObject as! IndexCard
+            let dstItemID = dataSource.itemIdentifier(for: dstIdxPath)!
+            
+            if dstItemID != srcItemID {
+                let srcIdxPath = dataSource.indexPath(for: srcItemID)!
+                var snap = dataSource.snapshot()
+                if dstIdxPath.item > srcIdxPath.item {
+                    snap.moveItem(srcItemID, afterItem: dstItemID)
+                } else {
+                    snap.moveItem(srcItemID, beforeItem: dstItemID)
+                }
+                dataSource.apply(snap)
+            }
+        }
+        
+        return UICollectionViewDropProposal(operation: .move)
+    }
+    
     
     
     func collectionView(_ collectionView: UICollectionView,
