@@ -53,7 +53,7 @@ class DragNDropExampleController: UICollectionViewController {
                 
             cell.title.text = cards[indexPath.item].title
             cell.img.image = cards[indexPath.item].img
-        
+            cell.backgroundColor = .lightGray
             return cell
         }
         applySnapshot()
@@ -75,6 +75,7 @@ class DragNDropExampleController: UICollectionViewController {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.3))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .fixed(5)
         
         let section = NSCollectionLayoutSection(group: group)
         
@@ -136,10 +137,23 @@ extension DragNDropExampleController: UICollectionViewDragDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
-        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
-        let item = cards.remove(at: coordinator.items.first!.sourceIndexPath!.item)
-        // Вставляем элемент на новое место
-        cards.insert(item, at: destinationIndexPath.item)
-        applySnapshot()
+        guard let destinationIndexPath = coordinator.destinationIndexPath,
+              let dragItem = coordinator.items.first?.dragItem
+        else { return }
+        
+        //model update
+        let movedCard = cards.remove(at: coordinator.items.first!.sourceIndexPath!.item)
+        cards.insert(movedCard, at: destinationIndexPath.item)
+        
+        
+        let srcItemID = coordinator.session.localDragSession!.items.first!.localObject as! IndexCard
+        let dstItemID = dataSource.itemIdentifier(for: destinationIndexPath)!
+
+        let anim = coordinator.drop(dragItem, toItemAt: destinationIndexPath)
+        anim.addCompletion { _ in
+            if (srcItemID != dstItemID) {
+                self.applySnapshot()
+            }
+        }
     }
 }
