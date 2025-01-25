@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D1520C22D45484F0048A425 /* IndexCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1520C12D45484C0048A425 /* IndexCard.swift */; };
 		9D25AFF52D451FDA0094BE24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFE92D451FD90094BE24 /* AppDelegate.swift */; };
 		9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */; };
 		9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFF12D451FD90094BE24 /* MyCell.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D1520C12D45484C0048A425 /* IndexCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCard.swift; sourceTree = "<group>"; };
 		9D25AFE92D451FD90094BE24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D25AFEA2D451FD90094BE24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSDragNDropController.swift; sourceTree = "<group>"; };
@@ -50,13 +52,14 @@
 		9D25AFF42D451FD90094BE24 /* EditableCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				9D25AFFF2D451FFF0094BE24 /* Old Data Source */,
 				9D25AFFE2D451FE00094BE24 /* Diffable Data Source(DDS) */,
+				9D25AFFF2D451FFF0094BE24 /* Old Data Source */,
 				9D25AFE92D451FD90094BE24 /* AppDelegate.swift */,
 				9D25AFEA2D451FD90094BE24 /* Assets.xcassets */,
 				9D25AFEC2D451FD90094BE24 /* Info.plist */,
 				9D25AFEE2D451FD90094BE24 /* LaunchScreen.storyboard */,
 				9D25AFF02D451FD90094BE24 /* Main.storyboard */,
+				9D1520C12D45484C0048A425 /* IndexCard.swift */,
 				9D25AFF12D451FD90094BE24 /* MyCell.swift */,
 				9DFDB4922D4522840082AE8B /* MyCell.xib */,
 				9D25AFF32D451FD90094BE24 /* SceneDelegate.swift */,
@@ -177,6 +180,7 @@
 				9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */,
 				9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */,
 				9DFDB4B42D4534540082AE8B /* ReorderInteractivelyController.swift in Sources */,
+				9D1520C22D45484F0048A425 /* IndexCard.swift in Sources */,
 				9DFDB4B52D4534540082AE8B /* DragNDropController.swift in Sources */,
 				9D25AFF82D451FDA0094BE24 /* DDSReorderInteractivelyController.swift in Sources */,
 				9D25AFF92D451FDA0094BE24 /* SceneDelegate.swift in Sources */,

@@ -8,21 +8,6 @@
 import UIKit
 
 
-private struct IndexCard {
-    var title: String
-    var img: UIImage
-}
-
-private var cards: [IndexCard] = [
-    IndexCard(title: "Card 1", img: UIImage(systemName: "square.and.arrow.down.badge.xmark.fill")!),
-    IndexCard(title: "Card 2", img: UIImage(systemName: "trash.slash")!),
-    IndexCard(title: "Card 3", img: UIImage(systemName: "folder")!),
-    IndexCard(title: "Card 4", img: UIImage(systemName: "tray.2")!),
-    IndexCard(title: "Card 5", img: UIImage(systemName: "tray.circle")!),
-    IndexCard(title: "Card 6", img: UIImage(systemName: "document.fill")!),
-    IndexCard(title: "Card 7", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
-    ]
-
 class DragNDropController: UICollectionViewController {
 
 
