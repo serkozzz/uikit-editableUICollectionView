@@ -7,7 +7,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "mycell"
+private let reuseIdentifier = "dragNdropCell"
 
 private struct IndexCard : Hashable {
     var title: String
@@ -53,14 +53,19 @@ class DragNDropExampleController: UICollectionViewController {
                 
             cell.title.text = cards[indexPath.item].title
             cell.img.image = cards[indexPath.item].img
-            cell.backgroundColor = .lightGray
+            
+            var backgroundConf = cell.defaultBackgroundConfiguration()
+            backgroundConf.backgroundColor = .white
+            backgroundConf.strokeColor = .darkGray
+            backgroundConf.strokeWidth = 3
+            cell.backgroundConfiguration = backgroundConf
             return cell
         }
         applySnapshot()
     }
 
     
-    func applySnapshot() {
+    private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, IndexCard>()
         snapshot.appendSections([0])
         snapshot.appendItems(cards)
@@ -68,8 +73,7 @@ class DragNDropExampleController: UICollectionViewController {
     }
     
     
-    
-    func createLayout() -> UICollectionViewCompositionalLayout {
+    private func createLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalWidth(0.3))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
@@ -137,6 +141,8 @@ extension DragNDropExampleController: UICollectionViewDragDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
+        print("performDropWith")
+        
         guard let destinationIndexPath = coordinator.destinationIndexPath,
               let dragItem = coordinator.items.first?.dragItem
         else { return }
@@ -148,12 +154,14 @@ extension DragNDropExampleController: UICollectionViewDragDelegate, UICollection
         
         let srcItemID = coordinator.session.localDragSession!.items.first!.localObject as! IndexCard
         let dstItemID = dataSource.itemIdentifier(for: destinationIndexPath)!
-
-        let anim = coordinator.drop(dragItem, toItemAt: destinationIndexPath)
-        anim.addCompletion { _ in
-            if (srcItemID != dstItemID) {
-                self.applySnapshot()
-            }
-        }
+        
+        let destCell = collectionView.cellForItem(at: destinationIndexPath)!
+        
+        let anim = coordinator.drop(dragItem, intoItemAt: destinationIndexPath, rect: destCell.bounds)
+//        anim.addCompletion { _ in
+//            if (srcItemID != dstItemID) {
+//                self.applySnapshot()
+//            }
+//        }
     }
 }

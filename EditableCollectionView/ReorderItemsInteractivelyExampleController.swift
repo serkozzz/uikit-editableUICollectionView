@@ -7,7 +7,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "mycell"
+private let reuseIdentifier = "reorderingCell"
 
 private struct IndexCard : Hashable {
     var title: String

@@ -24,7 +24,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mycell" id="kfG-KY-7qU" customClass="MyCollectionViewCell" customModule="EditableCollectionView" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dragNdropCell" id="kfG-KY-7qU" customClass="MyCollectionViewCell" customModule="EditableCollectionView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="152" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rRC-Id-sA4">
@@ -45,16 +45,25 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bv2-PR-fbg" userLabel="DraggingView">
+                                            <rect key="frame" x="3" y="3" width="146" height="144"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="bv2-PR-fbg" firstAttribute="top" secondItem="rRC-Id-sA4" secondAttribute="top" constant="3" id="4z2-js-CbG"/>
                                         <constraint firstItem="OIf-Sj-mCF" firstAttribute="leading" secondItem="rRC-Id-sA4" secondAttribute="leading" id="8RJ-Q3-Cva"/>
                                         <constraint firstAttribute="bottom" secondItem="OIf-Sj-mCF" secondAttribute="bottom" id="Dmu-G6-X05"/>
+                                        <constraint firstAttribute="trailing" secondItem="bv2-PR-fbg" secondAttribute="trailing" constant="3" id="Kum-Fn-0bn"/>
+                                        <constraint firstItem="bv2-PR-fbg" firstAttribute="leading" secondItem="rRC-Id-sA4" secondAttribute="leading" constant="3" id="cK9-8B-nYp"/>
+                                        <constraint firstAttribute="bottom" secondItem="bv2-PR-fbg" secondAttribute="bottom" constant="3" id="lX2-4O-7uZ"/>
                                         <constraint firstAttribute="trailing" secondItem="OIf-Sj-mCF" secondAttribute="trailing" id="ogY-EP-mzx"/>
                                         <constraint firstItem="OIf-Sj-mCF" firstAttribute="top" secondItem="rRC-Id-sA4" secondAttribute="top" id="xBZ-LQ-W36"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="152" height="150"/>
                                 <connections>
+                                    <outlet property="draggingView" destination="bv2-PR-fbg" id="cb5-hZ-KIT"/>
                                     <outlet property="img" destination="yM5-ER-HH9" id="vlI-nZ-Pk1"/>
                                     <outlet property="title" destination="5R8-OE-my7" id="T0B-yy-OVi"/>
                                 </connections>
@@ -86,7 +95,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mycell" id="sFD-h4-wBb" customClass="MyCollectionViewCell" customModule="EditableCollectionView" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reorderingCell" id="sFD-h4-wBb" customClass="MyCollectionViewCell" customModule="EditableCollectionView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="152" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="v71-4o-65u">

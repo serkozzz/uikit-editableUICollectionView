@@ -14,6 +14,8 @@ class MyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var selectedSign: UIImageView!
     @IBOutlet weak var unselectedSign: UIImageView!
     
+
+    
     var selectable: Bool = false {
         didSet {
             selectionSignContrainer.isHidden = !selectable
@@ -27,6 +29,24 @@ class MyCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var draggingView: UIView!{
+        didSet{
+            print("draggingView has been set")
+        }
+    }
+    override func updateConfiguration(using state: UICellConfigurationState) {
+        super.updateConfiguration(using: state)
+
+        print(state.cellDragState)
+        if state.cellDragState == .dragging {
+            draggingView.isHidden = false
+        } else {
+            draggingView.isHidden = true
+        }
+    }
+    
+    
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var title: UILabel!
 }
+
