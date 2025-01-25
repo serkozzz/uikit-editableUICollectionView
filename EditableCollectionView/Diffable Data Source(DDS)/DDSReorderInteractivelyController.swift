@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "reorderingCell"
-
 private struct IndexCard : Hashable {
     var title: String
     var img: UIImage
@@ -44,7 +42,7 @@ private var cards: [IndexCard] = [
     IndexCard(title: "Card 17", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
 ]
 
-class ReorderItemsInteractivelyExampleController: UICollectionViewController {
+class DDSReorderInteractivelyController: UICollectionViewController {
     
     private var selectedItems: Set<IndexCard> = []
     let toolbarTitlelLabel = UILabel()
@@ -77,10 +75,11 @@ class ReorderItemsInteractivelyExampleController: UICollectionViewController {
 
         self.navigationController?.isToolbarHidden = true
         
+        collectionView.register(MyCell.nib(), forCellWithReuseIdentifier: MyCell.reuseID)
         dataSource = UICollectionViewDiffableDataSource<Int, IndexCard>(collectionView: collectionView) { [weak self] collectionView, indexPath, card in
             
             guard let self else { return nil }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.reuseID, for: indexPath) as! MyCell
             
             cell.title.text = card.title
             cell.img.image = card.img

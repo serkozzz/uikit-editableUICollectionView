@@ -6,30 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9D25AFF52D451FDA0094BE24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFE92D451FD90094BE24 /* AppDelegate.swift */; };
+		9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */; };
+		9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFF12D451FD90094BE24 /* MyCell.swift */; };
+		9D25AFF82D451FDA0094BE24 /* DDSReorderInteractivelyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFF22D451FD90094BE24 /* DDSReorderInteractivelyController.swift */; };
+		9D25AFF92D451FDA0094BE24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFF32D451FD90094BE24 /* SceneDelegate.swift */; };
+		9D25AFFA2D451FDA0094BE24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D25AFEA2D451FD90094BE24 /* Assets.xcassets */; };
+		9D25AFFC2D451FDA0094BE24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D25AFEE2D451FD90094BE24 /* LaunchScreen.storyboard */; };
+		9D25AFFD2D451FDA0094BE24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D25AFF02D451FD90094BE24 /* Main.storyboard */; };
+		9DFDB4932D4522840082AE8B /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFDB4922D4522840082AE8B /* MyCell.xib */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		9D25AFE92D451FD90094BE24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9D25AFEA2D451FD90094BE24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSDragNDropController.swift; sourceTree = "<group>"; };
+		9D25AFEC2D451FD90094BE24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D25AFED2D451FD90094BE24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9D25AFEF2D451FD90094BE24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9D25AFF12D451FD90094BE24 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
+		9D25AFF22D451FD90094BE24 /* DDSReorderInteractivelyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSReorderInteractivelyController.swift; sourceTree = "<group>"; };
+		9D25AFF32D451FD90094BE24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9D92F8112D2B680900983D1F /* EditableCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EditableCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DFDB4922D4522840082AE8B /* MyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9D92F8232D2B680B00983D1F /* Exceptions for "EditableCollectionView" folder in "EditableCollectionView" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 9D92F8102D2B680900983D1F /* EditableCollectionView */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		9D92F8132D2B680900983D1F /* EditableCollectionView */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				9D92F8232D2B680B00983D1F /* Exceptions for "EditableCollectionView" folder in "EditableCollectionView" target */,
-			);
-			path = EditableCollectionView;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9D92F80E2D2B680900983D1F /* Frameworks */ = {
@@ -42,10 +43,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D25AFF42D451FD90094BE24 /* EditableCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				9D25AFFF2D451FFF0094BE24 /* Old Data Source */,
+				9D25AFFE2D451FE00094BE24 /* Diffable Data Source(DDS) */,
+				9D25AFE92D451FD90094BE24 /* AppDelegate.swift */,
+				9D25AFEA2D451FD90094BE24 /* Assets.xcassets */,
+				9D25AFEC2D451FD90094BE24 /* Info.plist */,
+				9D25AFEE2D451FD90094BE24 /* LaunchScreen.storyboard */,
+				9D25AFF02D451FD90094BE24 /* Main.storyboard */,
+				9D25AFF12D451FD90094BE24 /* MyCell.swift */,
+				9DFDB4922D4522840082AE8B /* MyCell.xib */,
+				9D25AFF32D451FD90094BE24 /* SceneDelegate.swift */,
+			);
+			path = EditableCollectionView;
+			sourceTree = "<group>";
+		};
+		9D25AFFE2D451FE00094BE24 /* Diffable Data Source(DDS) */ = {
+			isa = PBXGroup;
+			children = (
+				9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */,
+				9D25AFF22D451FD90094BE24 /* DDSReorderInteractivelyController.swift */,
+			);
+			path = "Diffable Data Source(DDS)";
+			sourceTree = "<group>";
+		};
+		9D25AFFF2D451FFF0094BE24 /* Old Data Source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Old Data Source";
+			sourceTree = "<group>";
+		};
 		9D92F8082D2B680900983D1F = {
 			isa = PBXGroup;
 			children = (
-				9D92F8132D2B680900983D1F /* EditableCollectionView */,
+				9D25AFF42D451FD90094BE24 /* EditableCollectionView */,
 				9D92F8122D2B680900983D1F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,9 +106,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				9D92F8132D2B680900983D1F /* EditableCollectionView */,
 			);
 			name = EditableCollectionView;
 			packageProductDependencies = (
@@ -122,6 +153,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D25AFFA2D451FDA0094BE24 /* Assets.xcassets in Resources */,
+				9DFDB4932D4522840082AE8B /* MyCell.xib in Resources */,
+				9D25AFFC2D451FDA0094BE24 /* LaunchScreen.storyboard in Resources */,
+				9D25AFFD2D451FDA0094BE24 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +167,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D25AFF52D451FDA0094BE24 /* AppDelegate.swift in Sources */,
+				9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */,
+				9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */,
+				9D25AFF82D451FDA0094BE24 /* DDSReorderInteractivelyController.swift in Sources */,
+				9D25AFF92D451FDA0094BE24 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9D25AFEE2D451FD90094BE24 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9D25AFED2D451FD90094BE24 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9D25AFF02D451FD90094BE24 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9D25AFEF2D451FD90094BE24 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9D92F8252D2B680B00983D1F /* Debug */ = {

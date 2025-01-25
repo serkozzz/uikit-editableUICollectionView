@@ -7,7 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "dragNdropCell"
 
 private struct IndexCard : Hashable {
     var title: String
@@ -33,7 +32,7 @@ private var cards: [IndexCard] = [
     IndexCard(title: "Card 7", img: UIImage(systemName: "exclamationmark.triangle.text.page.rtl")!),
     ]
 
-class DragNDropExampleController: UICollectionViewController {
+class DDSDragNDropController: UICollectionViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Int, IndexCard>!
     private var isFirstDropUpdate = true
@@ -46,10 +45,12 @@ class DragNDropExampleController: UICollectionViewController {
         collectionView.dragInteractionEnabled = true // Включить drag
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
+        
+        collectionView.register(MyCell.nib(), forCellWithReuseIdentifier: MyCell.reuseID)
 
         dataSource = UICollectionViewDiffableDataSource<Int, IndexCard>(collectionView: collectionView) { collectionView, indexPath, card in
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.reuseID, for: indexPath) as! MyCell
                 
             cell.title.text = cards[indexPath.item].title
             cell.img.image = cards[indexPath.item].img
@@ -89,7 +90,7 @@ class DragNDropExampleController: UICollectionViewController {
 }
 
 
-extension DragNDropExampleController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+extension DDSDragNDropController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView,
                         itemsForBeginning session: UIDragSession,
