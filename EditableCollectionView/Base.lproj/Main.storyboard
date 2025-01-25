@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,7 +33,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ulD-b4-TVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1492.3664122137404" y="-33.098591549295776"/>
+            <point key="canvasLocation" x="1324" y="-844"/>
         </scene>
         <!--Reorder Interactively Controller-->
         <scene sceneID="cCl-f8-Xob">
@@ -58,7 +59,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yvj-Ai-x51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1492" y="723"/>
+            <point key="canvasLocation" x="2175" y="-555"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="U7u-pQ-Vm8">
@@ -68,33 +69,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kkd-h9-aYy">
-                                <rect key="frame" x="80.666666666666686" y="387.66666666666669" width="232" height="76.666666666666686"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="HOM-uS-nOr">
+                                <rect key="frame" x="71.666666666666686" y="203" width="250" height="244.33333333333337"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cM-NG-k6I">
-                                        <rect key="frame" x="0.0" y="0.0" width="232" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Drag'n'Drop"/>
-                                        <connections>
-                                            <segue destination="tUe-G7-gq7" kind="show" id="u0z-Py-AQn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChG-yr-LM4">
-                                        <rect key="frame" x="0.0" y="42.333333333333314" width="232" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Reorder Items Interactively "/>
-                                        <connections>
-                                            <segue destination="eGq-g4-9qW" kind="show" id="P2z-r8-R2d"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kkd-h9-aYy">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="107.66666666666667"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diffable Data Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6X-k8-a1Q">
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="23"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cM-NG-k6I">
+                                                <rect key="frame" x="0.0" y="31.000000000000004" width="250" height="34.333333333333343"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Drag'n'Drop"/>
+                                                <connections>
+                                                    <segue destination="tUe-G7-gq7" kind="show" id="u0z-Py-AQn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChG-yr-LM4">
+                                                <rect key="frame" x="0.0" y="73.333333333333314" width="250" height="34.333333333333343"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Reorder Interactively "/>
+                                                <connections>
+                                                    <segue destination="eGq-g4-9qW" kind="show" id="P2z-r8-R2d"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="jdG-Dh-qyj"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VFO-m2-o5u">
+                                        <rect key="frame" x="0.0" y="136.66666666666669" width="250" height="107.66666666666669"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Old Data Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjs-NK-h9g">
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="23"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHP-p3-RsS">
+                                                <rect key="frame" x="0.0" y="31.000000000000004" width="250" height="34.333333333333343"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Drag'n'Drop"/>
+                                                <connections>
+                                                    <segue destination="MvE-K2-emZ" kind="show" id="zAB-0N-1i5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvv-zv-1sh">
+                                                <rect key="frame" x="0.0" y="73.333333333333314" width="250" height="34.333333333333343"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Reorder Interactively "/>
+                                                <connections>
+                                                    <segue destination="vXn-LB-sxa" kind="show" id="xhk-Xq-B0i"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="krZ-7d-BLR"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
+                                <variation key="heightClass=compact" axis="horizontal"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yyO-dn-V8t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="kkd-h9-aYy" firstAttribute="centerX" secondItem="rfP-lf-aIV" secondAttribute="centerX" id="3qn-OH-VdA"/>
-                            <constraint firstItem="kkd-h9-aYy" firstAttribute="centerY" secondItem="rfP-lf-aIV" secondAttribute="centerY" id="bTg-bU-dad"/>
+                            <constraint firstItem="HOM-uS-nOr" firstAttribute="top" secondItem="yyO-dn-V8t" secondAttribute="top" constant="100" id="6oO-r7-6E1"/>
+                            <constraint firstItem="HOM-uS-nOr" firstAttribute="centerX" secondItem="rfP-lf-aIV" secondAttribute="centerX" id="E2C-sj-Ob4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c8b-t2-kNY"/>
@@ -102,6 +148,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TPO-TB-eD6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="329" y="55"/>
+        </scene>
+        <!--Reorder Interactively Controller-->
+        <scene sceneID="SIj-Xb-9jM">
+            <objects>
+                <collectionViewController id="vXn-LB-sxa" customClass="ReorderInteractivelyController" customModule="EditableCollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dgR-yd-y4c">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fUe-J6-53K">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fJC-JW-jFz">
+                                <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DBA-Ck-GFh">
+                                    <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="vXn-LB-sxa" id="80j-j9-hjC"/>
+                            <outlet property="delegate" destination="vXn-LB-sxa" id="hMU-75-1Sd"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="CVj-zt-cV8"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Wj-2Z-my5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1194" y="563"/>
+        </scene>
+        <!--DragN Drop Controller-->
+        <scene sceneID="cbX-ue-RgB">
+            <objects>
+                <collectionViewController id="MvE-K2-emZ" customClass="DragNDropController" customModule="EditableCollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="pae-53-QTi">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QCh-nB-P43">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WQD-B9-EiN">
+                                <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fw0-wq-jnq">
+                                    <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="MvE-K2-emZ" id="6kD-AJ-zIG"/>
+                            <outlet property="delegate" destination="MvE-K2-emZ" id="AFc-Ag-zJB"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Nfn-OL-e42"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1uy-Sb-me4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1720" y="175"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZnF-UM-4H2">

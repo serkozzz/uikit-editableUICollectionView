@@ -16,6 +16,8 @@
 		9D25AFFC2D451FDA0094BE24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D25AFEE2D451FD90094BE24 /* LaunchScreen.storyboard */; };
 		9D25AFFD2D451FDA0094BE24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D25AFF02D451FD90094BE24 /* Main.storyboard */; };
 		9DFDB4932D4522840082AE8B /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFDB4922D4522840082AE8B /* MyCell.xib */; };
+		9DFDB4B42D4534540082AE8B /* ReorderInteractivelyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDB4B32D4534540082AE8B /* ReorderInteractivelyController.swift */; };
+		9DFDB4B52D4534540082AE8B /* DragNDropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDB4B22D4534540082AE8B /* DragNDropController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		9D25AFF32D451FD90094BE24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9D92F8112D2B680900983D1F /* EditableCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EditableCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DFDB4922D4522840082AE8B /* MyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
+		9DFDB4B22D4534540082AE8B /* DragNDropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropController.swift; sourceTree = "<group>"; };
+		9DFDB4B32D4534540082AE8B /* ReorderInteractivelyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderInteractivelyController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 		9D25AFFF2D451FFF0094BE24 /* Old Data Source */ = {
 			isa = PBXGroup;
 			children = (
+				9DFDB4B22D4534540082AE8B /* DragNDropController.swift */,
+				9DFDB4B32D4534540082AE8B /* ReorderInteractivelyController.swift */,
 			);
 			path = "Old Data Source";
 			sourceTree = "<group>";
@@ -170,6 +176,8 @@
 				9D25AFF52D451FDA0094BE24 /* AppDelegate.swift in Sources */,
 				9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */,
 				9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */,
+				9DFDB4B42D4534540082AE8B /* ReorderInteractivelyController.swift in Sources */,
+				9DFDB4B52D4534540082AE8B /* DragNDropController.swift in Sources */,
 				9D25AFF82D451FDA0094BE24 /* DDSReorderInteractivelyController.swift in Sources */,
 				9D25AFF92D451FDA0094BE24 /* SceneDelegate.swift in Sources */,
 			);

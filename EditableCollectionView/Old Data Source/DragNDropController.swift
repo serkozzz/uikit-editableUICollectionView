@@ -7,7 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "mycell"
 
 private struct IndexCard {
     var title: String
@@ -34,6 +33,8 @@ class DragNDropController: UICollectionViewController {
         collectionView.dragInteractionEnabled = true // Включить drag
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
+        
+        collectionView.register(MyCell.nib(), forCellWithReuseIdentifier: MyCell.reuseID)
 
     }
 
@@ -64,7 +65,7 @@ class DragNDropController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.reuseID, for: indexPath) as! MyCell
             
         cell.title.text = cards[indexPath.item].title
         cell.img.image = cards[indexPath.item].img
