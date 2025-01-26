@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D1520C22D45484F0048A425 /* IndexCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1520C12D45484C0048A425 /* IndexCard.swift */; };
+		9D1520C42D454ADF0048A425 /* DDSDragNDropManulAnimController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1520C32D454ADF0048A425 /* DDSDragNDropManulAnimController.swift */; };
 		9D25AFF52D451FDA0094BE24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFE92D451FD90094BE24 /* AppDelegate.swift */; };
 		9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */; };
 		9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25AFF12D451FD90094BE24 /* MyCell.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		9D1520C12D45484C0048A425 /* IndexCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCard.swift; sourceTree = "<group>"; };
+		9D1520C32D454ADF0048A425 /* DDSDragNDropManulAnimController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSDragNDropManulAnimController.swift; sourceTree = "<group>"; };
 		9D25AFE92D451FD90094BE24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D25AFEA2D451FD90094BE24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSDragNDropController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				9D25AFEB2D451FD90094BE24 /* DDSDragNDropController.swift */,
+				9D1520C32D454ADF0048A425 /* DDSDragNDropManulAnimController.swift */,
 				9D25AFF22D451FD90094BE24 /* DDSReorderInteractivelyController.swift */,
 			);
 			path = "Diffable Data Source(DDS)";
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D25AFF52D451FDA0094BE24 /* AppDelegate.swift in Sources */,
+				9D1520C42D454ADF0048A425 /* DDSDragNDropManulAnimController.swift in Sources */,
 				9D25AFF62D451FDA0094BE24 /* DDSDragNDropController.swift in Sources */,
 				9D25AFF72D451FDA0094BE24 /* MyCell.swift in Sources */,
 				9DFDB4B42D4534540082AE8B /* ReorderInteractivelyController.swift in Sources */,

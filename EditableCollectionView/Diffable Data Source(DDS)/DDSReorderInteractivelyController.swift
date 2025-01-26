@@ -25,10 +25,8 @@ class DDSReorderInteractivelyController: UICollectionViewController {
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
         view.addGestureRecognizer(longPressGestureRecognizer)
         
-        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.rightBarButtonItem = editButtonItem
 
-
-        
         let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
         
 
@@ -56,6 +54,15 @@ class DDSReorderInteractivelyController: UICollectionViewController {
             return cell
         }
         applySnapshot()
+        dataSource.reorderingHandlers.canReorderItem = { [weak self] _ in
+            guard let self else { return false }
+            return self.isEditing
+        }
+        dataSource.reorderingHandlers.didReorder = { transaction in
+            if let applyingResult = cards.applying(transaction.difference) {
+                cards = applyingResult
+            }
+        }
     }
     
     func applySnapshot() {
@@ -99,20 +106,6 @@ class DDSReorderInteractivelyController: UICollectionViewController {
         default:
             collectionView.cancelInteractiveMovement()
         }
-    }
-    
-
-    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return isEditing
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
-        let item = cards.remove(at: sourceIndexPath.item)
-        // Вставляем элемент на новое место
-        cards.insert(item, at: destinationIndexPath.item)
-        
-        applySnapshot()
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {

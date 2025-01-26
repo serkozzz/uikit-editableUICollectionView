@@ -7,8 +7,9 @@
 
 import UIKit
 
-
-class DDSDragNDropController: UICollectionViewController {
+//wrong complex way
+//I just staied it here only for history because it drank my blood almost whole week
+class DDSDragNDropManulAnimController: UICollectionViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Int, IndexCard>!
     
@@ -37,12 +38,6 @@ class DDSDragNDropController: UICollectionViewController {
             return cell
         }
         applySnapshot()
-        dataSource.reorderingHandlers.canReorderItem = { _ in true }
-        dataSource.reorderingHandlers.didReorder = { transaction in
-            if let applyingResult = cards.applying(transaction.difference) {
-                cards = applyingResult
-            }
-        }
     }
 
     
@@ -67,11 +62,10 @@ class DDSDragNDropController: UICollectionViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
 }
 
 
-extension DDSDragNDropController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+extension DDSDragNDropManulAnimController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView,
                         itemsForBeginning session: UIDragSession,
@@ -87,12 +81,52 @@ extension DDSDragNDropController: UICollectionViewDragDelegate, UICollectionView
         dropSessionDidUpdate session: any UIDropSession,
         withDestinationIndexPath destinationIndexPath: IndexPath?
     ) -> UICollectionViewDropProposal {
-        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        
+        if let dstIdxPath = destinationIndexPath {
+        
+            let srcItemID = session.localDragSession!.items.first!.localObject as! IndexCard
+            let dstItemID = dataSource.itemIdentifier(for: dstIdxPath)!
+            
+            if dstItemID != srcItemID {
+                let srcIdxPath = dataSource.indexPath(for: srcItemID)!
+                var snap = dataSource.snapshot()
+                if dstIdxPath.item > srcIdxPath.item {
+                    snap.moveItem(srcItemID, afterItem: dstItemID)
+                } else {
+                    snap.moveItem(srcItemID, beforeItem: dstItemID)
+                }
+                dataSource.apply(snap)
+            }
+        }
+        
+        return UICollectionViewDropProposal(operation: .move)
     }
     
     
     
     func collectionView(_ collectionView: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
+        print("performDropWith")
+        
+        guard let destinationIndexPath = coordinator.destinationIndexPath,
+              let dragItem = coordinator.items.first?.dragItem
+        else { return }
+        
+        //model update
+        let movedCard = cards.remove(at: coordinator.items.first!.sourceIndexPath!.item)
+        cards.insert(movedCard, at: destinationIndexPath.item)
+        
+        
+        let srcItemID = coordinator.session.localDragSession!.items.first!.localObject as! IndexCard
+        let dstItemID = dataSource.itemIdentifier(for: destinationIndexPath)!
+        
+        let destCell = collectionView.cellForItem(at: destinationIndexPath)!
+        
+        let anim = coordinator.drop(dragItem, intoItemAt: destinationIndexPath, rect: destCell.bounds)
+//        anim.addCompletion { _ in
+//            if (srcItemID != dstItemID) {
+//                self.applySnapshot()
+//            }
+//        }
     }
 }
