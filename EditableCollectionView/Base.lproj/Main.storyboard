@@ -161,9 +161,6 @@
                                                 <rect key="frame" x="0.0" y="31.000000000000004" width="250" height="34.333333333333343"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Drag'n'Drop"/>
-                                                <connections>
-                                                    <segue destination="eGq-g4-9qW" kind="show" id="yq9-5e-Vch"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvv-zv-1sh">
                                                 <rect key="frame" x="0.0" y="73.333333333333314" width="250" height="34.333333333333343"/>

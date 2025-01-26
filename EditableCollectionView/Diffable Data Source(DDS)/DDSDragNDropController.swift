@@ -17,8 +17,6 @@ class DDSDragNDropController: UICollectionViewController {
         collectionView.collectionViewLayout = createLayout()
         
         collectionView.dragInteractionEnabled = true // Включить drag
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
         
         collectionView.register(MyCell.nib(), forCellWithReuseIdentifier: MyCell.reuseID)
 
@@ -68,31 +66,4 @@ class DDSDragNDropController: UICollectionViewController {
         return layout
     }
     
-}
-
-
-extension DDSDragNDropController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        itemsForBeginning session: UIDragSession,
-                        at indexPath: IndexPath) -> [UIDragItem] {
-        let itemProvider = NSItemProvider(object: NSString())
-        let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = cards[indexPath.item]
-        return [dragItem]
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        dropSessionDidUpdate session: any UIDropSession,
-        withDestinationIndexPath destinationIndexPath: IndexPath?
-    ) -> UICollectionViewDropProposal {
-        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-    }
-    
-    
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        performDropWith coordinator: UICollectionViewDropCoordinator) {
-    }
 }

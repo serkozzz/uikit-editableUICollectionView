@@ -22,7 +22,7 @@ class ReorderInteractivelyController: UICollectionViewController {
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
         view.addGestureRecognizer(longPressGestureRecognizer)
         
-        navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.rightBarButtonItem = editButtonItem
 
 
         
