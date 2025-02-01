@@ -22,9 +22,6 @@ class DDSReorderInteractivelyController: UICollectionViewController {
         
         self.installsStandardGestureForInteractiveMovement = false
         
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
-        view.addGestureRecognizer(longPressGestureRecognizer)
-        
         navigationItem.rightBarButtonItem = editButtonItem
 
         let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
@@ -51,6 +48,8 @@ class DDSReorderInteractivelyController: UICollectionViewController {
             cell.img.image = card.img
             cell.selectable = isEditing
             cell.cellSelected = selectedItems.contains(card)
+            let panPressGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panPressGesture))
+            cell.dragHandler.addGestureRecognizer(panPressGestureRecognizer)
             return cell
         }
         applySnapshot()
@@ -93,7 +92,7 @@ class DDSReorderInteractivelyController: UICollectionViewController {
         if (!editing) { self.navigationController?.isToolbarHidden = true }
     }
     
-    @objc func longPressGesture(_ recognizer: UILongPressGestureRecognizer) {
+    @objc func panPressGesture(_ recognizer: UILongPressGestureRecognizer) {
         switch recognizer.state {
         case .began:
             guard let selectedIndexPath = collectionView.indexPathForItem(at: recognizer.location(in: collectionView)) else { return }

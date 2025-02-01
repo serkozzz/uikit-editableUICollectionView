@@ -58,22 +58,30 @@
                         <rect key="frame" x="3" y="3" width="580" height="528"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.3.horizontal" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="758-TI-O3i">
+                        <rect key="frame" x="5" y="494" width="40" height="30.333333333333258"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="kLo-uo-Um0" secondAttribute="trailing" constant="5" id="0CF-il-pBQ"/>
                     <constraint firstAttribute="bottom" secondItem="FOw-zB-82e" secondAttribute="bottom" id="0Rl-56-T3d"/>
                     <constraint firstAttribute="trailing" secondItem="FOw-zB-82e" secondAttribute="trailing" id="5B8-ZV-zJD"/>
+                    <constraint firstAttribute="bottom" secondItem="758-TI-O3i" secondAttribute="bottom" constant="5" id="HcV-CJ-XXc"/>
                     <constraint firstAttribute="bottom" secondItem="TAB-2h-R4V" secondAttribute="bottom" constant="3" id="Ld5-tj-FSj"/>
                     <constraint firstItem="TAB-2h-R4V" firstAttribute="leading" secondItem="NUd-nG-N9G" secondAttribute="leading" constant="3" id="OJF-Jr-RAp"/>
+                    <constraint firstItem="758-TI-O3i" firstAttribute="height" secondItem="kLo-uo-Um0" secondAttribute="height" id="UfS-ms-yxK"/>
+                    <constraint firstItem="758-TI-O3i" firstAttribute="width" secondItem="kLo-uo-Um0" secondAttribute="width" id="cc0-sC-cW2"/>
                     <constraint firstAttribute="trailing" secondItem="TAB-2h-R4V" secondAttribute="trailing" constant="3" id="e3c-QZ-pDv"/>
                     <constraint firstItem="FOw-zB-82e" firstAttribute="leading" secondItem="NUd-nG-N9G" secondAttribute="leading" id="eN0-lq-DLy"/>
                     <constraint firstAttribute="bottom" secondItem="kLo-uo-Um0" secondAttribute="bottom" constant="5" id="j7P-Dh-hln"/>
                     <constraint firstItem="TAB-2h-R4V" firstAttribute="top" secondItem="NUd-nG-N9G" secondAttribute="top" constant="3" id="lSO-8Z-bZ1"/>
+                    <constraint firstItem="758-TI-O3i" firstAttribute="leading" secondItem="NUd-nG-N9G" secondAttribute="leading" constant="5" id="mJC-tS-kiw"/>
                     <constraint firstItem="FOw-zB-82e" firstAttribute="top" secondItem="NUd-nG-N9G" secondAttribute="top" id="rg9-nV-NPR"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="586" height="534"/>
             <connections>
+                <outlet property="dragHandler" destination="758-TI-O3i" id="Ywi-ta-UMf"/>
                 <outlet property="draggingView" destination="TAB-2h-R4V" id="omh-wv-R4R"/>
                 <outlet property="img" destination="pWe-W6-W6i" id="jCl-H0-MCq"/>
                 <outlet property="selectedSign" destination="7Pl-eS-WL9" id="WhK-Gk-8dO"/>
@@ -88,6 +96,7 @@
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="circle" catalog="system" width="128" height="123"/>
         <image name="exclamationmark.triangle.text.page.rtl" catalog="system" width="115" height="128"/>
+        <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

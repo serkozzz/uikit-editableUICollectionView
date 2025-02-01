@@ -22,6 +22,7 @@ class MyCell: UICollectionViewCell {
     @IBOutlet weak var draggingView: UIView!
 
     
+    @IBOutlet weak var dragHandler: UIImageView!
     var selectable: Bool = false {
         didSet {
             selectionSignContrainer.isHidden = !selectable

@@ -19,9 +19,6 @@ class ReorderInteractivelyController: UICollectionViewController {
         
         self.installsStandardGestureForInteractiveMovement = false
         
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture))
-        view.addGestureRecognizer(longPressGestureRecognizer)
-        
         navigationItem.rightBarButtonItem = editButtonItem
 
 
@@ -64,7 +61,7 @@ class ReorderInteractivelyController: UICollectionViewController {
         if (!editing) { self.navigationController?.isToolbarHidden = true }
     }
     
-    @objc func longPressGesture(_ recognizer: UILongPressGestureRecognizer) {
+    @objc func panPressGesture(_ recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             guard let selectedIndexPath = collectionView.indexPathForItem(at: recognizer.location(in: collectionView)) else {return }
@@ -124,6 +121,8 @@ class ReorderInteractivelyController: UICollectionViewController {
         cell.img.image = cards[indexPath.item].img
         cell.selectable = isEditing
         cell.cellSelected = selectedIndices.contains(indexPath)
+        let panPressGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panPressGesture))
+        cell.dragHandler.addGestureRecognizer(panPressGestureRecognizer)
         return cell
     }
     
